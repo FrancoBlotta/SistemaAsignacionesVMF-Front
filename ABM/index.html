@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SistemaAsignacionesVMC</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <div class="navbar">
+                <!-- Icono Home -->
+                <img src="img/home-svgrepo-com.svg" class="img" alt="Icono Home" onclick="mostrarHome()" title="Home">
+    
+                <!-- Icono Member -->
+                <img src="img/people-svgrepo-com.svg" class="img" alt="Icono listar Members" onclick="mostrarMembers()" title="Members">
+            </div>
+        </nav>
+
+
+        <div class="section-home" id="section-home">
+                <h1 class="section-home-text">Bienvenido!<br>
+                Sistema de Asignaciones</br>VMC</strong>
+        </div>
+
+
+        <div class="section-members" id="section-members">
+                <div class="navbar-members">
+                    <div class="navbar-iconos">
+                        <!-- Icono Add  -->
+                        <img src="img/add-profile-svgrepo-com (1).svg" alt="Icono agregar Member" id="img-members" title="Agregar" onclick="crearMember()">
+                        <!-- Icono Borrar -->
+                        <img src="img/trash-alt-svgrepo-com.svg" alt="Icono borrar Member" id="img-members" title="Borrar" onclick="borrarMember()">
+                    </div>
+                        <div class="buscador">
+                            <span class="buscador-span">Buscador</span>
+                            <input type="text" placeholder="Ingrese nombre o apellido" class="buscador-input"  id="buscador-nombre">
+                        </div>
+
+                            <table id="tabla-members">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2">HERMANOS</th>
+                                    </tr>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nombre</th>
+                                        <th>Apellido</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tabla-members-datos" >
+
+                                </tbody>
+                            </table>
+                </div>
+                <div class="form-members">
+                    
+                    <div class="form-members-navbar">
+                        <h3>&#128188 Datos Personales</h3>
+                        <span>
+                            <button class="buscador-boton" id="boton-editar" onclick="editarMember()">Editar</button>
+                        </span>
+                    </div>
+                    <div class="form-members-datos">
+                        <div class="form-members-datos-campos">
+
+                            <input type="number" placeholder="ID" id="id" name="id" disabled hidden>
+                            </br>
+                            <label for="nombre">Nombre* </label>
+                            <input type="text" placeholder="Nombre (Min. 2 - Max.15)" id="nombre" name="nombre" disabled>
+                    
+                            <label for="apellido">Apellido* </label>
+                            <input type="text" placeholder="Apellido (Min. 2 - Max.15)" id="apellido" name="apellido" disabled>
+                        </div>
+
+                        <div class="form-members-datos-campos">
+                            <label for="celular">Celular </label>
+                            <input type="number" placeholder="Celular. Ej: 296540212" id="celular" name="celular" disabled min="0" max="9999999999">
+                        </div>
+
+                        <div class="form-members-datos-campos">
+                        <label for="genero">Genero* </label>
+                        Masculino <input type="radio" name="genero" id="masculino" name="genero" value="masculino" disabled>
+                        Femenino <input type="radio" name="genero" id="femenino" name="genero" value="femenino" disabled>
+                        </div>
+
+                        <div class="form-members-datos-campos">
+                        <label for="tutor">Tutor* </label>
+                        Si <input type="radio" name="tutor" id="si" name="tutor" value="si" disabled onclick="mostrarTutor()">
+                        No <input type="radio" name="tutor" id="no" name="tutor" value="no" disabled onclick="ocultarTutor()">
+                        <input type="text" placeholder="Quien? (ID)" id="tutor" disabled>
+                        </div>
+                    </div>    
+                <h4 class="form-members-titulo">&#128421; TESOROS DE LA BIBLIA</h4>
+                    <div class="form-members-datos-campos">
+                        <label for="presidente">Presidente</label><input type="checkbox" id="presidente" disabled data-id_task="1" >
+                        <label for="oracion">Oración</label><input type="checkbox" id="oracion" disabled data-id_task="2" >
+                        <label for="tesoros">Discurso tesoros</label><input type="checkbox" id="tesoros" disabled data-id_task="3" >
+                        <label for="perlas">Busquemos perlas escondidas</label><input type="checkbox" id="perlas" disabled data-id_task="4" >
+                        <label for="lectura">Lectura de la Biblia</label><input type="checkbox" id="lectura" disabled data-id_task="5" >
+                    </div>
+
+                <h4 class="form-members-titulo">&#128187; SEAMOS MEJORES MAESTROS</h4>
+                    <div class="form-members-datos-campos">
+                        <label for="conversacion">Primera conversación</label><input type="checkbox" id="conversacion" disabled data-id_task="6" >
+                        <label for="revisitas">Haga revisitas</label><input type="checkbox" id="revisitas" disabled data-id_task="7" >
+                        <label for="discipulos">Haga discípulos</label><input type="checkbox" id="discipulos" disabled data-id_task="8" >
+                        <label for="creencias">Explique sus creencias</label><input type="checkbox" id="creencias" disabled data-id_task="9" >
+                        <label for="ayudante">Ayudante</label><input type="checkbox" id="ayudante" disabled data-id_task="10" >
+                        <label for="discurso">Discurso</label><input type="checkbox" id="discurso" disabled data-id_task="11" >
+                    </div>
+
+                <h4 class="form-members-titulo">&#128187; NUESTRA VIDA CRISTIANA</h4>
+                    <div class="form-members-datos-campos">
+                        <label for="intervenciones">Intervenciones</label><input type="checkbox" id="intervenciones" disabled data-id_task="12" >
+                        <label for="estudio">Estudio bíblico de la congregación</label><input type="checkbox" id="estudio" disabled data-id_task="13" >
+                        <label for="lector">Lector</label><input type="checkbox" id="lector" disabled data-id_task="14" >
+                    </div>    
+
+                <h4 class="form-members-titulo">&#128587; TAREAS</h4>
+                    <div class="form-members-datos-campos">
+                        <label for="acomodador">Acomodador</label><input type="checkbox" id="acomodador" disabled data-id_task="15" >
+                        <label for="microfonista">Microfonista</label><input type="checkbox" id="microfonista" disabled data-id_task="16" >
+                        <label for="audio">Audio</label><input type="checkbox" id="audio" disabled data-id_task="17" >
+                        <label for="video">Video</label><input type="checkbox" id="video" disabled data-id_task="18" >
+                        <label for="plataforma">Plataforma</label><input type="checkbox" id="plataforma" disabled data-id_task="19" >
+                    </div>    
+                    <div class="form-members-titulo">
+                        <button class="buscador-boton" id="boton-guardar-cambios" onclick="putMember()">Guardar cambios</button>
+                        <button class="buscador-boton" id="boton-crear"  onclick="saveMember()">Crear</button>
+                    </div>
+                    
+                </div>
+        </div>
+    </div>
+
+    
+    <script src="js/script.js">
+    </script>
+</body>
+</html>
